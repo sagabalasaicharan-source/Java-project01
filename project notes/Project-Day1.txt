@@ -1,0 +1,449 @@
+=======================================================================================
+			Java Project Development 
+=======================================================================================
+	Title			:		Employee Management System 
+	Client			:		BridgeSoft 
+	Frontend Technologies	:		HTML5, CSS3, JavaScript,Bootstrap5,React
+	Backend Technologies	:		Java 8 and Spring Boot
+	Databases		:		MySQL Database 
+	Tools			:		Maven, POSTMAN, GIT/GITHUB		
+=======================================================================================
+
+Project Structure 
+-----------------
+frontend
+|
+|------node_modules
+|
+|------public
+	|
+	|---index.html 	
+	|---mainfest.json
+	|---favicon.ico 
+|------src
+	|
+	|---index.js 
+	|---index.css 
+	|
+	|---App.js 
+	|---App.css
+	|---App.test.js 
+	|
+	|---components
+		|
+		|---Header.js 
+		|---EmployeeList.js 
+		|---Footer.js 
+
+|------package.json 
+|------README.md 
+
+step1:
+------
+	Create a react project i.e frontend.
+	ex:
+		npx create-react-app frontend
+
+step2:
+-----
+	Switch to the project.
+	ex:
+		cd  frontend
+
+step3:
+-----
+	install bootstrap, react-router-dom and axios library.
+	ex:
+		npm install bootstrap 
+		npm install react-router-dom 
+		npm install axios 
+
+step4:
+------
+	import bootstrap inside  index.js file.
+	ex:
+		import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+step5:
+-----
+	Run react project.
+	ex:
+		npm start
+
+step6:
+------
+	Test the application.
+	ex:
+		http://localhost:3000
+
+step7:
+------
+	Goto App.js file and set the background.
+
+App.js 
+------
+import './App.css';
+function App()
+{
+    return (
+        <div className="bg-color">
+
+        </div>
+    )
+}
+export default App;
+
+step8:
+------
+	Add CSS code inside App.css file.
+
+App.css
+-------
+.bg-color
+{
+    height: 100vh;
+    background : linear-gradient(cyan,blue);
+}
+
+step9:
+-------
+	Create a "components" folder inside "src".
+
+step10:
+-----
+	Create Header.js component inside "components" folder.
+
+Header.js 
+---------
+function Header()
+{
+    return(
+
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+              <div className="container">
+              <a href="" className="navbar-brand fw-bold"> BridgeSoft</a>  
+              </div>
+        </nav>
+
+    )
+}
+export default Header;
+
+
+step11:
+------
+	Invoke Header component from App.js file.
+
+App.js 
+-------
+import './App.css';
+import Header from './components/Header';
+function App()
+{
+    return (
+        <div className="bg-color">
+            <Header/>
+        </div>
+    )
+}
+export default App;
+
+step12:
+-------
+	Create EmployeeList.js component inside "components" folder.
+
+EmployeeList.js 
+----------------
+import {useState} from 'react';
+function EmployeeList()
+{
+    const [employees,setEmployees]= useState([]);
+
+    return(
+        <div className='container pt-5'>
+                <h4 className='text-center pt-5'> Employee Details</h4>
+
+                <div className='row pt-5'>
+                <table className='table table-bordered table-striped'>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>DOJ</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            employees.map(employee=>{
+                                return <tr key={employee.id}>
+                                            <td>{employee.id}</td>
+                                            <td>{employee.name}</td>
+                                            <td>{employee.doj}</td>
+                                            <td>{employee.dept.deptName}</td>
+                                            <td>{employee.dept.designation}</td>
+                                        </tr>
+                            })
+                        }
+                    </tbody>
+
+                </table>
+                </div>
+        </div>
+    )
+}
+export default EmployeeList;
+
+step13:
+-------
+	Invoke EmployeeList component from App.js file.
+
+App.js 
+------
+import './App.css';
+import EmployeeList from './components/EmployeeList';
+import Header from './components/Header';
+function App()
+{
+    return (
+        <div className="bg-color">
+            <Header/>
+            <div className='container'>
+                <EmployeeList/>
+            </div>
+        </div>
+    )
+}
+export default App;
+
+step13:
+-------
+	Create a Footer.js component inside "components" folder.
+
+Footer.js 
+---------
+import '../App.css';
+function Footer()
+{
+    return (
+        <div className="footer">
+               <small> All Right Reserved &copy;2025  </small> 
+        </div>
+    )
+}
+export default Footer;
+
+
+step14:
+------
+	Add CSS code inside App.css file.
+
+App.css
+------
+.bg-color
+{
+    height: 100vh;
+    background : linear-gradient(cyan,blue);
+}
+.footer
+{
+    width: 100%;
+    height: 35px;
+    background-color:#ecf0f1;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    line-height: 30px;
+}
+
+step15:
+-------
+	Invoke Footer component from App.js file.
+
+App.js 
+------
+import './App.css';
+import EmployeeList from './components/EmployeeList';
+import Footer from './components/Footer';
+import Header from './components/Header';
+function App()
+{
+    return (
+        <div className="bg-color">
+            <Header/>
+            <div className='container'>
+                <EmployeeList/>
+            </div>
+            <Footer/>
+        </div>
+    )
+}
+export default App;
+
+step16:
+------
+	Adding routing logic to App.js file.
+
+App.js 
+-------
+import './App.css';
+import EmployeeList from './components/EmployeeList';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import {BrowserRouter,Routes,Route} from 'react-router-dom';
+function App()
+{
+    return (
+        <div className="bg-color">
+            <Header/>
+            
+            <BrowserRouter>
+            <div className='container'>
+                <Routes>
+                    <Route exact path='/' element={<EmployeeList/>}></Route>
+                    <Route path='/employees' element={<EmployeeList/>}></Route>
+                </Routes>
+            </div>
+            </BrowserRouter>
+
+            <Footer/>
+        </div>
+    )
+}
+export default App;
+
+step17:
+------
+	Check the application by using below request url.
+	ex:
+		http://localhost:3000/ 
+		http://localhost:3000/employees
+
+step18:
+-------
+	Install react simple typewriter package.
+	ex:
+		npm install react-simple-typewriter 
+
+step19:
+-------
+	Add typewriter effect logic inside EmployeeList component.
+
+EmployeeList.js
+---------------
+import {useState} from 'react';
+import {useTypewriter,Cursor} from 'react-simple-typewriter';
+function EmployeeList()
+{
+    const [employees,setEmployees]= useState([]);
+
+    const [value] = useTypewriter({
+        words: ["Details","List","Info"],
+        loop:true,
+        typeSpeed:120,
+        deleteSpeed:80
+    })
+
+
+    return(
+        <div className='container pt-5'>
+                <h4 className='text-center pt-5'> Employee {value} <Cursor/></h4>
+
+                <div className='row pt-5'>
+                <table className='table table-bordered table-striped'>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>DOJ</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            employees.map(employee=>{
+                                return <tr key={employee.id}>
+                                            <td>{employee.id}</td>
+                                            <td>{employee.name}</td>
+                                            <td>{employee.doj}</td>
+                                            <td>{employee.dept.deptName}</td>
+                                            <td>{employee.dept.designation}</td>
+                                        </tr>
+                            })
+                        }
+                    </tbody>
+
+                </table>
+                </div>
+        </div>
+    )
+}
+export default EmployeeList;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
